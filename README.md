@@ -118,15 +118,7 @@ Bu nedenle, genel çerçeve “**denetimsiz öğrenme tabanlı anomali tespit**�
 
 ---
 
-## 🧾 Kaynakça (APA Formatı)
-Yıldırım, A. (2025). *Makine Öğrenimi ile Siber Güvenliği Geliştirme:  
-Attention-VAE ve Meta-Öğrenme Yaklaşımı ile Anomali Tespiti.*  
-
-
 ------------------------------------------------------------------------------------------------------------------
-
-
-
 
 
 # 🧠 Network Anomaly Detection with Attention-VAE + Mahalanobis + Meta-Classifier
@@ -229,6 +221,3 @@ The model effectively distinguishes **normal vs. anomalous** traffic patterns.
 
 ---
 
-## 🧾 Citation (APA)
-Yıldırım, A. (2025). *Enhancing Cybersecurity with Machine Learning:  
-Evaluating the Efficacy of Attention-VAE and Meta-Learning in Anomaly Detection.* 

@@ -8,30 +8,6 @@ anomalileri daha hassas bir şekilde tanımlamayı hedefler.
 
 ---
 
----
-
-## 🧩 Notlar
-
-### 🔸 Neden XGBoost Kullandık?
-Başlangıçta model tamamen **unsupervised (denetimsiz)** çalışıyordu ve yalnızca **Attention-VAE + Mahalanobis uzaklığı** kombinasyonu kullanıldı.  
-Bu yapı **F1-skoru ≈ %87** civarında bir başarı elde etti.  
-Ancak, farklı uzaylardan (reconstruction, latent, input) gelen skorların birbirine göre önem derecesi sabit kaldığı için model bazı anomalileri kaçırıyordu.
-
-Bu nedenle, skorları otomatik olarak birleştiren küçük bir **meta-sınıflandırıcı (XGBoost)** eklendi.  
-XGBoost modeli, yalnızca **validation (doğrulama)** verisi üzerinde eğitilerek  
-her bir skorun ağırlığını öğrenir ve en uygun karar sınırını belirler.  
-Sonuç olarak, **F1-skoru %95–97 seviyesine** yükselmiştir. ✅
-
----
-
-### 🔸 Unsupervised Yaklaşıma Nasıl Sadık Kalındı?
-Bu çalışma hâlâ **unsupervised (denetimsiz)** yapıda kalmaktadır çünkü:
-- **Ana model (Attention-VAE)** yalnızca **normal ağ trafiği (label=0)** verisiyle eğitilmiştir.  
-- XGBoost meta-modeli **etiketli test verisi üzerinde eğitilmemiştir**, sadece validation setinde skor kalibrasyonu yapar.  
-- Yani sistem, **normal davranışı öğrenir**, sonrasında **anormal davranışları tahmin eder.**
-
-Bu nedenle, genel çerçeve “**denetimsiz öğrenme tabanlı anomali tespit**” paradigmasıyla tamamen uyumludur.
-
 
 ## ⚙️ Mimari Yapı
 
@@ -43,8 +19,7 @@ Bu nedenle, genel çerçeve “**denetimsiz öğrenme tabanlı anomali tespit**�
 
 Girdi → [Attention Katmanı] → Encoder → Latent Uzay (μ, σ) → Decoder → Reconstruction
 
-yaml
-Kodu kopyala
+
 
 ---
 
@@ -69,8 +44,7 @@ Bu üç skor, ağ trafiğini farklı açılardan değerlendirerek anomalileri ç
 
 [recon_err, md_lat, md_in] → Meta Sınıflandırıcı (XGBoost) → Nihai Anomali Kararı
 
-yaml
-Kodu kopyala
+
 
 ---
 
@@ -94,26 +68,29 @@ Model, normal ve anormal trafiği yüksek doğrulukla ayırt etmektedir.
 
 ---
 
-## 📁 6. Proje Klasör Yapısı
+## 📁 6. Notlar
 
-project/
-├── data/
-│ ├── UNSW_NB15_training-set.csv
-│ ├── UNSW_NB15_testing-set.csv
-│
-├── utils/
-│ ├── attention_autoencoder.py
-│ ├── Data_gen.py
-│
-├── results/
-│ ├── models/
-│ │ ├── attention_vae_model.pth
-│ │ ├── best_meta_model.pkl
-│
-└── main.py
+---
 
-yaml
-Kodu kopyala
+### 🔸 Neden XGBoost Kullandık?
+Başlangıçta model tamamen **unsupervised (denetimsiz)** çalışıyordu ve yalnızca **Attention-VAE + Mahalanobis uzaklığı** kombinasyonu kullanıldı.  
+Bu yapı **F1-skoru ≈ %87** civarında bir başarı elde etti.  
+Ancak, farklı uzaylardan (reconstruction, latent, input) gelen skorların birbirine göre önem derecesi sabit kaldığı için model bazı anomalileri kaçırıyordu.
+
+Bu nedenle, skorları otomatik olarak birleştiren küçük bir **meta-sınıflandırıcı (XGBoost)** eklendi.  
+XGBoost modeli, yalnızca **validation (doğrulama)** verisi üzerinde eğitilerek  
+her bir skorun ağırlığını öğrenir ve en uygun karar sınırını belirler.  
+Sonuç olarak, **F1-skoru %95–97 seviyesine** yükselmiştir. ✅
+
+---
+
+### 🔸 Unsupervised Yaklaşıma Nasıl Sadık Kalındı?
+Bu çalışma hâlâ **unsupervised (denetimsiz)** yapıda kalmaktadır çünkü:
+- **Ana model (Attention-VAE)** yalnızca **normal ağ trafiği (label=0)** verisiyle eğitilmiştir.  
+- XGBoost meta-modeli **etiketli test verisi üzerinde eğitilmemiştir**, sadece validation setinde skor kalibrasyonu yapar.  
+- Yani sistem, **normal davranışı öğrenir**, sonrasında **anormal davranışları tahmin eder.**
+
+Bu nedenle, genel çerçeve “**denetimsiz öğrenme tabanlı anomali tespit**” paradigmasıyla tamamen uyumludur.
 
 ---
 
@@ -146,28 +123,7 @@ Yıldırım, A. (2025). *Makine Öğrenimi ile Siber Güvenliği Geliştirme:
 Attention-VAE ve Meta-Öğrenme Yaklaşımı ile Anomali Tespiti.*  
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -245,26 +201,7 @@ The model effectively distinguishes **normal vs. anomalous** traffic patterns.
 
 ---
 
-## 📁 6. Project Structure
-
-project/
-├── data/
-│ ├── UNSW_NB15_training-set.csv
-│ ├── UNSW_NB15_testing-set.csv
-│
-├── utils/
-│ ├── attention_autoencoder.py
-│ ├── Data_gen.py
-│
-├── results/
-│ ├── models/
-│ │ ├── attention_vae_model.pth
-│ │ ├── best_meta_model.pkl
-│
-└── main.py
-
-yaml
-Kodu kopyala
+## 📁 6. Notes
 
 ---
 

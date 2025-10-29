@@ -1,7 +1,7 @@
 # 🧠 Attention-VAE + Mahalanobis + Meta-Classifier ile Ağ Anomali Tespiti
 
 ## 🎯 Genel Bakış
-Bu proje, ağ trafiğindeki anormal davranışları **yarı-denetimsiz (semi-unsupervised)** bir yaklaşımla tespit etmeyi amaçlamaktadır.  
+Bu proje, ağ trafiğindeki anormal davranışları **unsupervised** bir yaklaşımla tespit etmeyi amaçlamaktadır.  
 Sistem, **Attention tabanlı Varyanslı Autoencoder (VAE)** modelini,  
 **Mahalanobis uzaklığı** ve **meta-seviye sınıflandırıcı (XGBoost)** ile birleştirerek  
 anomalileri daha hassas bir şekilde tanımlamayı hedefler.
